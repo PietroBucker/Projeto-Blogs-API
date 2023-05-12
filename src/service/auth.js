@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { userService } = require('../service');
-const { login } = require('./validationSchemas');
+const { User } = require('../models');
 
 const secret = process.env.JWT_SECRET || 'meusgredo';
 const jwtConfg = {
@@ -8,32 +7,19 @@ const jwtConfg = {
   algorithm: 'HS256',
 };
 
-const validaLogin = (req, res, next) => {
-  const { email, password } = req.body;
-  const { error } = login.validate({ email, password }); 
-  if (error) {
-    return res.status(400).json({ message: error.message });
-  }
-  next();
-};
-
-const tokenCreat = async (req, res) => {
-  const { email, password } = req.body;
- 
-  const user = await userService.findByEmail(email);
-  if (!user || user.password !== password) {
-   return res.status(400).json({ message: 'Invalid fields' });
-  }
+const tokenCreat = async (body) => {
+  const { id, email } = body;
     try {
     const payload = {
+      id,
       email,
       admin: false,
     };
 
     const token = jwt.sign(payload, secret, jwtConfg);
-    return res.status(200).json({ token });
+    return { token };
   } catch (err) {
-    return res.status(500).json({ message: 'Erro interno', error: err.message });
+    return { message: 'Erro interno', error: err.message };
   }
 };
 
@@ -48,7 +34,7 @@ const validaToken = async (req, res, next) => {
     if (decoded) {
       return res.status(401).json({ message: 'Expired or invalid token' });
     }
-    const user = await userService.findByPk();
+    const user = await User.findByPk();
 
     req.user = user;
     next();
@@ -58,7 +44,6 @@ const validaToken = async (req, res, next) => {
 };
 
 module.exports = {
-  validaLogin,
   tokenCreat,
   validaToken,
 };

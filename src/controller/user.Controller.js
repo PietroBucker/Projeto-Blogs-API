@@ -2,8 +2,11 @@ const { userService } = require('../service');
 
 const insert = async (req, res) => {
   const { body } = req;
-  const insertId = await userService.insert(body);
-  return res.status(201).json(insertId);
+  const result = await userService.insert(body);
+  if (result.status) {
+    return res.status(result.status).json({ message: result.message });
+  }
+  return res.status(201).json(result);
 };
 
 const findByEmail = async (req, res) => {
