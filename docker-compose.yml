@@ -8,6 +8,8 @@ services:
     image: node:16
     #definie o node como user padrao
     user: node
+    image: blogs_api
+    build: .
     # Nome do container para facilitar execução
     container_name: blogs_api
     # Mesmo que `docker run -t`
