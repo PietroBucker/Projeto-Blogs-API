@@ -1,5 +1,5 @@
-const { tokenCreat } = require('./auth');
-const { validField } = require('./businessRole');
+const { tokenCreat } = require('./validations/auth');
+const { validField } = require('./validations/businessRole');
 const { User } = require('../models');
 
 const login = async (body) => {

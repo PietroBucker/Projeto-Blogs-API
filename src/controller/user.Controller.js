@@ -1,5 +1,10 @@
 const { userService } = require('../service');
 
+const findAll = async (req, res) => {
+  const result = await userService.findAll();
+  return res.status(200).json(result);
+};
+
 const insert = async (req, res) => {
   const { body } = req;
   const result = await userService.insert(body);
@@ -16,6 +21,7 @@ const findByEmail = async (req, res) => {
 };
 
 module.exports = {
+  findAll,
   findByEmail,
   insert,
 };

@@ -1,9 +1,9 @@
 const { User } = require('../models');
-const { tokenCreat } = require('./auth');
-const { validaInsert } = require('./businessRole');
+const { tokenCreat } = require('./validations/auth');
+const { validaInsert } = require('./validations/businessRole');
 
 const findAll = async () => {
-  const result = await User.findAll();
+  const result = await User.findAll({ attributes: { exclude: 'password' } });
   return result;
 };
 
