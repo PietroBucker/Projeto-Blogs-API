@@ -12,6 +12,11 @@ const findByEmail = async (email) => {
   return result;
 };
 
+const findById = async (id) => {
+  const result = await User.findOne({ where: { id }, attributes: { exclude: 'password' } });
+  return result;
+};
+
 const insert = async (body) => {
   const error = await validaInsert(body);
   if (error) {
@@ -28,6 +33,7 @@ const insert = async (body) => {
 
 module.exports = {
   findAll,
+  findById,
   findByEmail,
   insert,
 };

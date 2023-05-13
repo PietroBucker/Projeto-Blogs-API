@@ -13,8 +13,14 @@ const BlogPostModel = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    published: DataTypes.STRING,
-    updated: DataTypes.STRING,
+    published: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updated: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
     userId: DataTypes.INTEGER,
   },
     {

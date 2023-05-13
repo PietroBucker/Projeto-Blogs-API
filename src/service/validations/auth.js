@@ -14,7 +14,6 @@ const tokenCreat = async (body) => {
       email,
       admin: false,
     };
-
     const token = jwt.sign(payload, secret, jwtConfg);
     return { token };
   } catch (err) {

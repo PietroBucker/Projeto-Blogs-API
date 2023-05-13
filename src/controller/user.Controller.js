@@ -5,6 +5,15 @@ const findAll = async (req, res) => {
   return res.status(200).json(result);
 };
 
+const findById = async (req, res) => {
+  const { id } = req.params;
+  const result = await userService.findById(id);
+  if (!result) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
+  return res.status(200).json(result);
+};
+
 const insert = async (req, res) => {
   const { body } = req;
   const result = await userService.insert(body);
@@ -22,6 +31,7 @@ const findByEmail = async (req, res) => {
 
 module.exports = {
   findAll,
+  findById,
   findByEmail,
   insert,
 };

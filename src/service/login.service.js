@@ -14,7 +14,7 @@ const login = async (body) => {
   if (!user || user.password !== password) {
    return { message: 'Invalid fields' };
   } 
-  const token = await tokenCreat(result, body.email);
+  const token = await tokenCreat({ id: user.id, ...result });
   return token;
 };
 

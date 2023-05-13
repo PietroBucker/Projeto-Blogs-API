@@ -8,7 +8,8 @@ const CategorieModel = (sequelize, DataTypes) => {
   const Categorie = sequelize.define('Category', {
     id: {
       type: DataTypes.INTEGER, 
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     name: DataTypes.STRING,
   },
