@@ -1,8 +1,13 @@
-const { BlogPost, PostCategory, Category } = require('../models');
+const { BlogPost, PostCategory, Category, User } = require('../models');
 const { validPost } = require('./validations/businessRole');
 
 const findAll = async () => {
-  const result = await BlogPost.findAll();
+  const result = await BlogPost.findAll({ 
+    include: [
+      { model: User, as: 'user', attributes: { exclude: 'password' } }, 
+      { model: Category, as: 'categories', through: { attributes: [] } }], 
+    
+  });
   return result;
 };
 
