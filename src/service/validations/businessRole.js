@@ -1,4 +1,5 @@
-const { validInsert, categoryName, validInsertPost } = require('./validationSchemas');
+const { validInsert, categoryName, 
+  validInsertPost, validUpdatePost } = require('./validationSchemas');
 
 const validaInsert = async ({ displayName, email, password }) => {
   const { error } = validInsert.validate({ displayName, email, password }); 
@@ -30,9 +31,17 @@ const validPost = async ({ title, content, categoryIds }) => {
   }
 };
 
+const validUpdatePosts = async ({ title, content }) => {
+  const { error } = validUpdatePost.validate({ title, content });
+  if (error) {
+    return error.message;
+  }
+};
+
 module.exports = {
   validaInsert,
   validField,
   validCategoryInsert,
   validPost,
+  validUpdatePosts,
 };

@@ -26,8 +26,15 @@ const validInsertPost = joi.object({
   'string.empty': 'Some required fields are missing',
 });
 
+const validUpdatePost = joi.object({
+  title: joi.string().required(),
+  content: joi.string().required(),
+}).messages({
+  'string.empty': 'Some required fields are missing',
+});
 module.exports = {
   validInsert,
   categoryName,
   validInsertPost,
+  validUpdatePost,
 };
