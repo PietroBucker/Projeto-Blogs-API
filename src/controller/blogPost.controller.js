@@ -1,7 +1,8 @@
 const { blogPostService } = require('../service');
 
 const findAll = async (req, res) => {
-  const result = await blogPostService.findAll();
+  const { q = '' } = req.query;
+  const result = await blogPostService.findAll(q);
   return res.status(200).json(result);
 };
 
@@ -35,9 +36,20 @@ const insert = async (req, res) => {
   return res.status(201).json(result.dataValues);
 };
 
+const postDelete = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  const result = await blogPostService.postDelete(id, userId);
+  if (result.status) {
+    return res.status(result.status).json({ message: result.message });
+  }
+  return res.status(204).json();
+};
+
 module.exports = {
   findAll,
   findById,
   update,
   insert,
+  postDelete,
 };

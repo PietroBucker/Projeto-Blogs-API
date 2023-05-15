@@ -2,8 +2,12 @@ const { Op } = require('sequelize');
 const { BlogPost, PostCategory, Category, User } = require('../models');
 const { validPost, validUpdatePosts } = require('./validations/businessRole');
 
-const findAll = async () => {
-  const result = await BlogPost.findAll({ 
+const findAll = async (query) => {
+  const result = await BlogPost.findAll({
+    where: { 
+      [Op.or]: { 
+        title: { [Op.like]: `%${query}%` }, 
+        content: { [Op.like]: `%${query}%` } } }, 
     include: [
       { model: User, as: 'user', attributes: { exclude: 'password' } }, 
       { model: Category, as: 'categories', through: { attributes: [] } }], 
@@ -27,12 +31,12 @@ const update = async (id, body, userId) => {
   if (error) {
     return { status: 400, message: error };
   }
-  const [teste] = await BlogPost.update(
+  const [result] = await BlogPost.update(
   { title, content }, 
   { where: { id, [Op.and]: { userId } } },
 );
 
-  if (teste === 0) {
+  if (result === 0) {
     return { status: 401, message: 'Unauthorized user' };
   }
   const find = await findById(id);
@@ -60,9 +64,22 @@ const insert = async (body) => {
   return result;
 };
 
+const postDelete = async (id, userId) => {
+  const existPost = await findById(id);
+  if (!existPost) {
+    return { status: 404, message: 'Post does not exist' };
+  }
+  const result = await BlogPost.destroy({ where: { [Op.and]: { id, userId } } });
+  if (result === 0) {
+    return { status: 401, message: 'Unauthorized user' };
+  }
+  return result;
+};
+
 module.exports = {
   findAll,
   findById,
   update,
   insert,
+  postDelete,
 };

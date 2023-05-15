@@ -31,9 +31,15 @@ const insert = async (body) => {
   return token;
 };
 
+const userDelete = async (id) => {
+  const result = await User.destroy({ where: { id } });
+  return result;
+};
+
 module.exports = {
   findAll,
   findById,
   findByEmail,
   insert,
+  userDelete,
 };

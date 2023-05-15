@@ -29,9 +29,16 @@ const findByEmail = async (req, res) => {
   return res.status(200).json(result);
 };
 
+const userDelete = async (req, res) => {
+  const { id } = req.user;
+  await userService.userDelete(id);
+  return res.status(204).json();
+};
+
 module.exports = {
   findAll,
   findById,
   findByEmail,
   insert,
+  userDelete,
 };

@@ -6,4 +6,5 @@ const router = express.Router();
 router.get('/:id', validaToken, userController.findById);
 router.get('/', validaToken, userController.findAll);
 router.post('/', userController.insert);
+router.delete('/me', validaToken, userController.userDelete);
 module.exports = router;

@@ -32,6 +32,7 @@ const validUpdatePost = joi.object({
 }).messages({
   'string.empty': 'Some required fields are missing',
 });
+
 module.exports = {
   validInsert,
   categoryName,
