@@ -1,14 +1,7 @@
-Projeto - API de blog
-O que nós vamos fazer?
-Você provavelmente já acessou algum blog na vida, certo? Agora é hora de você criar uma API para um! Vamos aplicar todo o conhecimento que vimos nesta seção para criar uma API e um banco de dados para produção de conteúdo para um blog, seguindo as melhores práticas de desenvolvimento de software!
+Projeto de Desenvolvimento Back-end: Construção de um Blog utilizando a arquitetura MSC (Model, Service, Controller).
 
-Por que isso é importante?
-Esta seção visa fornecer uma nova perspectiva sobre como você programa e como escreve seus testes. Será um projeto exploratório que vai além da dificuldade de construir a API: você precisará pensar constantemente: "Esta é a melhor maneira de fazer isso?" Vamos ao trabalho!
+Durante o desenvolvimento deste projeto, foi adotado a arquitetura MSC para garantir uma organização eficiente e escalável. Uma das principais tecnologias utilizadas foi a biblioteca Sequelize para realizar a comunicação com o banco de dados.
 
-Especificação
-O que vamos avaliar?
-Aderência do código à especificação. Seu programa deve se comportar conforme especificado na próxima seção.
-Organização do seu código.
-A qualidade e cobertura de seus testes.
-O que devo desenvolver?
-Este trabalho será individual. Você desenvolverá e testará uma API para um Blog, juntamente com um banco de dados. Usaremos a API do Blogger como exemplo. Nela, teremos um CRUD de posts com uma camada de autenticação do usuário.
+Ao utilizar o Sequelize, pudemos aproveitar sua funcionalidade de migrações e models para estruturar o esquema do banco de dados e definir a lógica de acesso aos dados. Essa abordagem tornou a aplicação mais robusta e coerente, facilitando a manutenção e evolução futura.
+
+Além disso, para garantir uma camada adicional de segurança, implementamos a biblioteca JWT (Json Web Token). Com o JWT, foi possível gerar tokens seguros para autenticar e autorizar os usuários do blog. Essa abordagem fortalece a segurança da aplicação e protege os dados sensíveis dos usuários.
